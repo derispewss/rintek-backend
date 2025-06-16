@@ -15,7 +15,7 @@ Backend API untuk aplikasi **RINTEK** (Ruang Interaktif Teknologi), dibangun den
 ### 1. Clone Project
 
 ```bash
-git clone https://github.com/username/rintek-backend.git
+git clone https://github.com/Sending-Works/rintek-backend
 cd rintek-backend
 ```
 
