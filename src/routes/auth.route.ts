@@ -8,7 +8,7 @@ const router = express.Router();
 router.post(
   "/register",
   [
-    body("name").notEmpty().withMessage("Nama wajib diisi"),
+    body("name").notEmpty().withMessage("Nama wajib diisi").toLowerCase(),
     body("password")
       .isLength({ min: 8 })
       .withMessage("Password minimal 8 karakter"),

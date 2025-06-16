@@ -31,7 +31,7 @@ export const getUserById = async (req: Request, res: Response) => {
 export const createUser = async (req: Request, res: Response) => {
   const { name, password } = req.body
   const hashedPassword = await bcrypt.hash(password, 10)
-  const { data, error } = await supabase.from('user').insert([
+  const { error } = await supabase.from('user').insert([
     {
       id: crypto.randomUUID(),
       name,
@@ -40,6 +40,10 @@ export const createUser = async (req: Request, res: Response) => {
     }
   ])
   if (error) {
+    if (error.code === '23505') {
+      sendResponse(res, HttpCode.CONFLICT, 'User already exists')
+      return
+    }
     sendResponse(res, HttpCode.INTERNAL_SERVER_ERROR, error.message)
     return
   }

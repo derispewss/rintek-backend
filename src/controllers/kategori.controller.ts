@@ -29,7 +29,7 @@ export const getKategoriById = async (req: Request, res: Response) => {
 
 export const createKategori = async (req: Request, res: Response) => {
   const { name, room_name, room_desc, slug, type } = req.body
-  const { data, error } = await supabase.from('kategori').insert([
+  const { error } = await supabase.from('kategori').insert([
     {
       id: crypto.randomUUID(),
       name,
@@ -49,7 +49,7 @@ export const createKategori = async (req: Request, res: Response) => {
 export const updateKategori = async (req: Request, res: Response) => {
   const { id } = req.params
   const { name, room_name, room_desc, slug, type } = req.body
-  const { data, error } = await supabase.from('kategori').update({ name, room_name, room_desc, slug, type }).eq('id', id).select().single()
+  const { error } = await supabase.from('kategori').update({ name, room_name, room_desc, slug, type }).eq('id', id).select().single()
   if (error) {
     sendResponse(res, HttpCode.INTERNAL_SERVER_ERROR, error.message)
     return
