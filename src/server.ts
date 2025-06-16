@@ -33,7 +33,4 @@ app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   res.status(500).json({ error: 'Internal Server Error', message: err.message })
 })
 
-const PORT = process.env.PORT || 3000
-app.listen(PORT, () => {
-  console.log(`🚀 Server ready at http://localhost:${PORT}`)
-})
+export default app
