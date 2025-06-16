@@ -153,6 +153,6 @@ rintek-backend/
 ## 🚀 Deploy
 
 - App ini siap deploy ke Vercel menggunakan konfigurasi `api/index.ts` dan `vercel.json`
-- Endpoint tersedia via: `https://<nama-project>.vercel.app/api/...`
+- Endpoint tersedia via: `https://rintek-backend.vercel.app`
 
 ---
