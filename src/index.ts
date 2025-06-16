@@ -4,9 +4,9 @@ import dotenv from 'dotenv'
 import helmet from 'helmet'
 import compression from 'compression'
 
-import userRoutes from '../routes/user.route'
-import kategoriRoutes from '../routes/kategori.route'
-import authRoutes from '../routes/auth.route'
+import userRoutes from './routes/user.route'
+import kategoriRoutes from './routes/kategori.route'
+import authRoutes from './routes/auth.route'
 
 dotenv.config()
 const app = express()
@@ -33,4 +33,7 @@ app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   res.status(500).json({ error: 'Internal Server Error', message: err.message })
 })
 
-export default app
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => {
+  console.log(`🚀 Server ready at http://localhost:${PORT}`)
+})
