@@ -61,6 +61,7 @@ src/
 ### 🔐 Auth
 | Method | Endpoint         | Deskripsi         |
 |--------|------------------|-------------------|
+| POST   | /api/users/register | Register user  |
 | POST   | /api/users/login | Login user        |
 
 ### 👤 User
@@ -68,7 +69,6 @@ src/
 |--------|------------------|-------------------------|
 | GET    | /api/users       | Ambil semua user        |
 | GET    | /api/users/:id   | Ambil user berdasarkan ID |
-| POST   | /api/users       | Register user baru      |
 | PUT    | /api/users/:id   | Update user             |
 | DELETE | /api/users/:id   | Hapus user              |
 
@@ -85,11 +85,19 @@ src/
 
 ## 🧾 Contoh Request Body
 
+### 🔐 Register
+```json
+{
+  "name": "username",
+  "password": "secret321"
+}
+```
+
 ### 🔐 Login
 ```json
 {
-  "name": "deris",
-  "password": "rahasia123"
+  "name": "username_exist",
+  "password": "secret321"
 }
 ```
 
