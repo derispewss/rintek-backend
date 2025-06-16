@@ -18,9 +18,9 @@ app.use(compression())
 app.use(express.json())
 
 // Routing
-app.use('/api/users', userRoutes)
-app.use('/api/kategori', kategoriRoutes)
-app.use('/api/auth', authRoutes)
+app.use('/users', userRoutes)
+app.use('/kategori', kategoriRoutes)
+app.use('/auth', authRoutes)
 
 // 404 Handler
 app.use((_req: Request, res: Response) => {
