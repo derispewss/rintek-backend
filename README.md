@@ -61,8 +61,8 @@ src/
 ### 🔐 Auth
 | Method | Endpoint         | Deskripsi         |
 |--------|------------------|-------------------|
-| POST   | /api/users/register | Register user  |
-| POST   | /api/users/login | Login user        |
+| POST   | /api/auth/register | Register user  |
+| POST   | /api/auth/login | Login user        |
 
 ### 👤 User
 | Method | Endpoint         | Deskripsi               |
@@ -85,11 +85,11 @@ src/
 
 ## 🧾 Contoh Request Body
 
-### 🔐 Register
+### 🧍‍♂️ Register User
 ```json
 {
-  "name": "username",
-  "password": "secret321"
+  "name": "deris",
+  "password": "rahasia123"
 }
 ```
 
@@ -98,14 +98,6 @@ src/
 {
   "name": "username_exist",
   "password": "secret321"
-}
-```
-
-### 🧍‍♂️ Register User
-```json
-{
-  "name": "deris",
-  "password": "rahasia123"
 }
 ```
 
