@@ -1,5 +1,5 @@
 
-# 📦 Rintek Backend
+# 📆 Rintek Backend
 
 Backend API untuk aplikasi **RINTEK** (Ruang Interaktif Teknologi), dibangun dengan:
 - Express.js + TypeScript
@@ -33,7 +33,7 @@ SUPABASE_KEY=your-supabase-service-role-key
 PORT=3000
 ```
 
-### 4. Jalankan Server Development
+### 4. Jalankan Server Development (lokal)
 
 ```bash
 npm run dev
@@ -44,14 +44,21 @@ npm run dev
 ## 📚 Struktur Folder
 
 ```
-src/
-├── controllers/     // Logic untuk user & kategori
-├── routes/          // Routing endpoint
-├── services/        // Supabase client
-├── types/           // TypeScript types (user, kategori, general)
-├── middlewares/     // Middleware validasi dan error
-├── utils/           // Fungsi umum seperti sendResponse
-└── index.ts         // Entry point aplikasi
+rintek-backend/
+├── api/
+│   └── index.ts          # Entry point untuk Vercel (serverless)
+├── src/
+│   ├── routes/           # Routing endpoint
+│   ├── controllers/      # Logic untuk user & kategori
+│   ├── services/         # Supabase client
+│   ├── types/            # TypeScript types (user, kategori, general)
+│   ├── middlewares/      # Middleware validasi dan error
+│   ├── utils/            # Fungsi umum seperti sendResponse
+│   └── server.ts         # Express app utama (tanpa listen)
+├── vercel.json
+├── tsconfig.json
+├── package.json
+└── .env
 ```
 
 ---
@@ -59,10 +66,10 @@ src/
 ## 🧪 API Endpoint
 
 ### 🔐 Auth
-| Method | Endpoint         | Deskripsi         |
-|--------|------------------|-------------------|
-| POST   | /api/auth/register | Register user  |
-| POST   | /api/auth/login | Login user        |
+| Method | Endpoint           | Deskripsi         |
+|--------|--------------------|-------------------|
+| POST   | /api/auth/register | Register user     |
+| POST   | /api/auth/login    | Login user        |
 
 ### 👤 User
 | Method | Endpoint         | Deskripsi               |
@@ -83,9 +90,9 @@ src/
 
 ---
 
-## 🧾 Contoh Request Body
+## 📎 Contoh Request Body
 
-### 🧍‍♂️ Register User
+### 👭‍♂️ Register User
 ```json
 {
   "name": "deris",
@@ -140,5 +147,12 @@ src/
 - Kolom `type` pada kategori menggunakan enum PostgreSQL (`PRIBADI`, `KOMUNITAS`)
 - `slug` pada kategori wajib unik
 - Gunakan Supabase SQL editor untuk setup awal database (`CREATE TABLE` & `ENUM`)
+
+---
+
+## 🚀 Deploy
+
+- App ini siap deploy ke Vercel menggunakan konfigurasi `api/index.ts` dan `vercel.json`
+- Endpoint tersedia via: `https://rintek-backend.vercel.app`
 
 ---
