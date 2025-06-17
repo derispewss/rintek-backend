@@ -17,7 +17,7 @@ router.get("/:id",
   ],
   getUserById
 );
-router.post("/:id/subscribe",
+router.patch("/:id/subscribe",
   [
     param("id").isUUID().withMessage("ID harus berupa UUID"), 
     body("subscription_type").isIn(["PRIBADI", "KOMUNITAS"]).withMessage("Tipe langganan harus PRIBADI atau KOMUNITAS"),
