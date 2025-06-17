@@ -7,6 +7,7 @@ import compression from 'compression'
 import userRoutes from './routes/user.route'
 import kategoriRoutes from './routes/kategori.route'
 import authRoutes from './routes/auth.route'
+import userKategori from './routes/userKategori.route'
 
 dotenv.config()
 const app = express()
@@ -20,6 +21,7 @@ app.use(express.json())
 // Routing
 app.use('/api/users', userRoutes)
 app.use('/api/kategori', kategoriRoutes)
+app.use('/api/user-kategori', userKategori)
 app.use('/api/auth', authRoutes)
 
 // 404 Handler

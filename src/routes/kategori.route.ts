@@ -7,6 +7,8 @@ import {
   getKategoriById,
   updateKategori,
   deleteKategori,
+  getKategoriBySlug,
+  getKategoriByType
 } from "../controllers/kategori.controller";
 
 const router = express.Router();
@@ -19,6 +21,22 @@ router.get(
     validateRequest,
   ],
   getKategoriById
+);
+router.get(
+  "/slug/:slug",
+  [
+    param("slug").notEmpty().withMessage("Slug kategori wajib diisi"),
+    validateRequest,
+  ],
+  getKategoriBySlug
+);
+router.get(
+  "/type/:type",
+  [
+    param("type").notEmpty().withMessage("Tipe kategori wajib diisi"),
+    validateRequest,
+  ],
+  getKategoriByType
 );
 router.post(
   "/",
@@ -49,7 +67,6 @@ router.put(
   ],
   updateKategori
 );
-
 router.delete(
   "/:id",
   [
