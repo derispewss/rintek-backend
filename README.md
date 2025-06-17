@@ -76,8 +76,6 @@ rintek-backend/
 |--------|------------------|-------------------------|
 | GET    | /api/users       | Ambil semua user        |
 | GET    | /api/users/:id   | Ambil user berdasarkan ID |
-| PUT    | /api/users/:id   | Update user             |
-| DELETE | /api/users/:id   | Hapus user              |
 
 ### 🏷️ Kategori & Relasi
 | Method | Endpoint                    | Deskripsi                                |
@@ -88,7 +86,6 @@ rintek-backend/
 | PUT    | /api/kategori/:id           | Update kategori                          |
 | DELETE | /api/kategori/:id           | Hapus kategori                           |
 | POST   | /api/user-kategori          | Tambah user ke kategori (relasi)         |
-| POST   | /api/user-subscription      | Tambah subscription user (relasi)        |
 
 ---
 
@@ -138,14 +135,6 @@ rintek-backend/
 {
   "user_id": "uuid-user",
   "kategori_id": "uuid-kategori"
-}
-```
-
-### 📅 Tambah User-Subscription
-```json
-{
-  "user_id": "uuid-user",
-  "subscription_type": "uuid-subscription-type"
 }
 ```
 
