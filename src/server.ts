@@ -7,8 +7,6 @@ import compression from 'compression'
 import userRoutes from './routes/user.route'
 import kategoriRoutes from './routes/kategori.route'
 import authRoutes from './routes/auth.route'
-import userKategoriRoutes from './routes/userKategori.route'
-import userSubscriptionRoutes from './routes/userSubscription.route'
 
 dotenv.config()
 const app = express()
@@ -23,8 +21,6 @@ app.use(express.json())
 app.use('/api/users', userRoutes)
 app.use('/api/kategori', kategoriRoutes)
 app.use('/api/auth', authRoutes)
-app.use('/api/user-kategori', userKategoriRoutes)
-app.use('/api/user-subscription', userSubscriptionRoutes)
 
 // 404 Handler
 app.use((_req: Request, res: Response) => {
@@ -37,5 +33,4 @@ app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   res.status(500).json({ error: 'Internal Server Error', message: err.message })
 })
 
-// Start server
 export default app

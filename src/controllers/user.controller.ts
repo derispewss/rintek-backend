@@ -6,7 +6,7 @@ import crypto from 'crypto'
 import bcrypt from 'bcrypt'
 
 export const getUsers = async (_req: Request, res: Response) => {
-  const { data, error } = await supabase.from('user').select('id, name, created_at')
+  const { data, error } = await supabase.from('user').select('id, name, subscription_type, created_at')
   if (error) {
     sendResponse(res, HttpCode.INTERNAL_SERVER_ERROR, error.message)
     return
@@ -16,7 +16,7 @@ export const getUsers = async (_req: Request, res: Response) => {
 
 export const getUserById = async (req: Request, res: Response) => {
   const { id } = req.params
-  const { data, error } = await supabase.from('user').select('id, name, created_at').eq('id', id).single()
+  const { data, error } = await supabase.from('user').select('id, name, subscription_type, created_at').eq('id', id).single()
   if (error) {
     if (error.code === 'PGRST116') {
         sendResponse(res, HttpCode.NOT_FOUND, 'User not found')
@@ -69,23 +69,40 @@ export const loginUser = async (req: Request, res: Response) => {
   sendResponse(res, HttpCode.OK, 'Login berhasil', { id: user.id, name: user.name })
 }
 
-export const updateUser = async (req: Request, res: Response) => {
+export const subscribeUser = async (req: Request, res: Response) => {
   const { id } = req.params
-  const { name } = req.body
-  const { error } = await supabase.from('user').update({ name }).eq('id', id).select().single()
-  if (error) {
-    sendResponse(res, HttpCode.INTERNAL_SERVER_ERROR, error.message)
-    return
-  }
-  sendResponse(res, HttpCode.OK, 'User updated successfully')
-}
+  const { subscription_type } = req.body
 
-export const deleteUser = async (req: Request, res: Response) => {
-  const { id } = req.params
-  const { error } = await supabase.from('user').delete().eq('id', id)
+  if (!subscription_type || !['PRIBADI', 'KOMUNITAS'].includes(subscription_type)) {
+    sendResponse(res, HttpCode.BAD_REQUEST, 'Subscription type tidak valid (PRIBADI/KOMUNITAS)')
+    return
+  }
+
+  const { data: existing, error: fetchError } = await supabase
+    .from('user')
+    .select('subscription_type')
+    .eq('id', id)
+    .single()
+
+  if (fetchError || !existing) {
+    sendResponse(res, HttpCode.NOT_FOUND, 'User tidak ditemukan')
+    return
+  }
+
+  if (existing.subscription_type) {
+    sendResponse(res, HttpCode.CONFLICT, 'User sudah memiliki subscription')
+    return
+  }
+
+  const { error } = await supabase
+    .from('user')
+    .update({ subscription_type })
+    .eq('id', id)
+
   if (error) {
     sendResponse(res, HttpCode.INTERNAL_SERVER_ERROR, error.message)
     return
   }
-  sendResponse(res, HttpCode.OK, 'User deleted successfully')
+
+  sendResponse(res, HttpCode.OK, 'Subscription berhasil dipilih')
 }
