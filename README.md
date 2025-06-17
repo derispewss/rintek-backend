@@ -49,7 +49,7 @@ rintek-backend/
 │   └── index.ts          # Entry point untuk Vercel (serverless)
 ├── src/
 │   ├── routes/           # Routing endpoint
-│   ├── controllers/      # Logic untuk user & kategori
+│   ├── controllers/      # Logic untuk user, kategori, dll.
 │   ├── services/         # Supabase client
 │   ├── types/            # TypeScript types (user, kategori, general)
 │   ├── middlewares/      # Middleware validasi dan error
@@ -79,14 +79,16 @@ rintek-backend/
 | PUT    | /api/users/:id   | Update user             |
 | DELETE | /api/users/:id   | Hapus user              |
 
-### 🏷️ Kategori
-| Method | Endpoint             | Deskripsi                   |
-|--------|----------------------|-----------------------------|
-| GET    | /api/kategori        | Ambil semua kategori        |
-| GET    | /api/kategori/:id    | Ambil kategori berdasarkan ID |
-| POST   | /api/kategori        | Tambah kategori baru        |
-| PUT    | /api/kategori/:id    | Update kategori             |
-| DELETE | /api/kategori/:id    | Hapus kategori              |
+### 🏷️ Kategori & Relasi
+| Method | Endpoint                    | Deskripsi                                |
+|--------|-----------------------------|------------------------------------------|
+| GET    | /api/kategori               | Ambil semua kategori                     |
+| GET    | /api/kategori/:id           | Ambil kategori berdasarkan ID            |
+| POST   | /api/kategori               | Tambah kategori baru                     |
+| PUT    | /api/kategori/:id           | Update kategori                          |
+| DELETE | /api/kategori/:id           | Hapus kategori                           |
+| POST   | /api/user-kategori          | Tambah user ke kategori (relasi)         |
+| POST   | /api/user-subscription      | Tambah subscription user (relasi)        |
 
 ---
 
@@ -95,8 +97,8 @@ rintek-backend/
 ### 👭‍♂️ Register User
 ```json
 {
-  "name": "deris",
-  "password": "rahasia123"
+  "name": "username_uniqe",
+  "password": "secret321"
 }
 ```
 
@@ -128,6 +130,22 @@ rintek-backend/
   "room_desc": "Refleksi dan pemikiran pribadi",
   "slug": "pribadi",
   "type": "PRIBADI"
+}
+```
+
+### 🔗 Tambah User-Kategori
+```json
+{
+  "user_id": "uuid-user",
+  "kategori_id": "uuid-kategori"
+}
+```
+
+### 📅 Tambah User-Subscription
+```json
+{
+  "user_id": "uuid-user",
+  "subscription_type": "uuid-subscription-type"
 }
 ```
 
